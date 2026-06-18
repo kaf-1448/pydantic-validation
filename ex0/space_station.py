@@ -15,36 +15,36 @@ class SpaceStation(BaseModel):
 
 
 def main() -> None:
+    print("Space Station Data Validation")
+    print("========================================")
+    print("Valid station created:")
+
+    space_station = SpaceStation(
+        station_id="ISS001",
+        name="International Space Station",
+        crew_size=6,
+        power_level=85.5,
+        oxygen_level=92.3,
+        last_maintenance=datetime.now(),
+        notes=None
+    )
+
+    print(f"ID: {space_station.station_id}")
+    print(f"Name: {space_station.name}")
+    print(f"Crew: {space_station.crew_size}")
+    print(f"Power: {space_station.power_level}%")
+    print(f"Oxygen: {space_station.oxygen_level}%")
+    status: str = 'Operational' if space_station.is_operational else "Offline"
+    print(f"Status:{status}")
+
     try:
-        print("Space Station Data Validation")
-        print("========================================")
-        print("Valid station created:")
-
-        space_station = SpaceStation(
-            station_id="ISS001",
-            name="International Space Station",
-            crew_size="6",
-            power_level="85.5",
-            oxygen_level=92.3,
-            last_maintenance=datetime.now(),
-            notes=None
-        )
-
-        print(f"ID: {space_station.station_id}")
-        print(f"Name: {space_station.name}")
-        print(f"Crew: {space_station.crew_size}")
-        print(f"Power: {space_station.power_level}%")
-        print(f"Oxygen: {space_station.oxygen_level}%")
-        status: str = 'Operational' if space_station.is_operational else "Offline"
-        print(f"Status:{status}")
-
         print("\n========================================")
         print("Expected validation error:")
         e_space_s = SpaceStation(
             station_id="ISS001",
             name="International Space Station",
-            crew_size="21",
-            power_level="85.5",
+            crew_size=21,
+            power_level=85.5,
             oxygen_level=92.3,
             last_maintenance=datetime.now(),
             notes="Operational"
@@ -53,7 +53,8 @@ def main() -> None:
         print(f"crew_size{e_space_s.crew_size}")
 
     except ValidationError as e:
-        print(e)
+        for error in e.errors():
+            print(error['msg'])
 
 
 if __name__ == "__main__":
