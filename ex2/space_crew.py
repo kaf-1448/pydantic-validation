@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field, ValidationError
 from pydantic import model_validator
-from typing import Optional
 from datetime import datetime
 from enum import Enum
 
@@ -103,39 +102,38 @@ def main() -> None:
         mission_id="M2024_MARS",
         destination="Mars",
         launch_date=datetime.now(),
-        duration_days="900",
+        duration_days=900,
         crew=[
-            {
-                "member_id": "M00",
-                "name": "Sarah Connor",
-                "rank": "commander",
-                "age": 19,
-                "specialization": "Mission Command",
-                "years_experience": 15,
-                "is_active": True
-            },
-            {
-                "member_id": "M02",
-                "name": "john Smit",
-                "rank": "lieutenant",
-                "age": 57,
-                "specialization": "Navigation",
-                "years_experience": 25,
-                "is_active": True
-            },
-            {
-                "member_id": "M03",
-                "name": "Alice Johnso",
-                "rank": "officer",
-                "age": 57,
-                "specialization": "Engineering",
-                "years_experience": 35,
-                "is_active": True
-            }
-
+            CrewMember(
+                member_id="M00",
+                name="Sarah Connor",
+                rank=Rank.COMMANDER,
+                age=19,
+                specialization="Mission Command",
+                years_experience=15,
+                is_active=True,
+            ),
+            CrewMember(
+                member_id="M02",
+                name="john Smit",
+                rank=Rank.LIEUTENANT,
+                age=57,
+                specialization="Navigation",
+                years_experience=25,
+                is_active=True,
+            ),
+            CrewMember(
+                member_id="M03",
+                name="Alice Johnso",
+                rank=Rank.OFFICER,
+                age=57,
+                specialization="Engineering",
+                years_experience=35,
+                is_active=True,
+            ),
         ],
         mission_status="planned",
-        budget_millions="2500",
+        budget_millions=2500,
     )
 
     print(f"Mission: {mission.mission_id}")
@@ -157,20 +155,29 @@ def main() -> None:
             mission_id="M2024_MARS",
             destination="Mars",
             launch_date=datetime.now(),
-            duration_days="900",
+            duration_days=900,
             crew=[
-                {
-                        "member_id": "M00",
-                        "name": "Sarah Connor",
-                        "rank": "cadet",
-                        "age": 19,
-                        "specialization": "Mission Command",
-                        "years_experience": 15,
-                        "is_active": True
-                }
+                CrewMember(
+                    member_id="M00",
+                    name="Sarah Connor",
+                    rank=Rank.COMMANDER,
+                    age=19,
+                    specialization="Mission Command",
+                    years_experience=15,
+                    is_active=True,
+                ),
+                CrewMember(
+                    member_id="M02",
+                    name="John Smith",
+                    rank=Rank.LIEUTENANT,
+                    age=57,
+                    specialization="Navigation",
+                    years_experience=25,
+                    is_active=True,
+                ),
             ],
             mission_status="planned",
-            budget_millions="2500",
+            budget_millions=2500,
         )
 
     except ValidationError as e:

@@ -73,12 +73,12 @@ def main() -> None:
 
     report = AlienContact(
         contact_id="AC_2024_001",
-        contact_type="radio",
+        contact_type=ContactType.RADIO,
         timestamp=datetime.now(),
         location="rea 51, Nevada",
-        signal_strength="8.5",
+        signal_strength=8.5,
         duration_minutes=45,
-        witness_count="5",
+        witness_count=5,
         message_received="Greetings from Zeta Reticuli"
     )
 
@@ -96,12 +96,12 @@ def main() -> None:
 
         report = AlienContact(
             contact_id="AC_2024_001",
-            contact_type="telepathic",
+            contact_type=ContactType.TELEPATHIC,
             timestamp=datetime.now(),
             location="rea 51, Nevada",
-            signal_strength="8.5",
+            signal_strength=8.5,
             duration_minutes=45,
-            witness_count="2",
+            witness_count=2,
             message_received="Greetings from Zeta Reticuli"
         )
         print(f"witness: {report.witness_count}")
